@@ -57,7 +57,7 @@ model.eval()
 @app.route('/predict', methods=['POST'])
 def predict():
     # data = request.get_json(force=True)
-    f = open('input.json')
+    f = open('/app/input.json')
     data = json.load(f)
     features = data['input_data']
     features_tensor = torch.FloatTensor(features).unsqueeze(0)
