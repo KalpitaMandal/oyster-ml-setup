@@ -60,7 +60,7 @@ def predict():
     f = open('/app/input.json')
     data = json.load(f)
     features = data['input_data']
-    features_tensor = torch.FloatTensor(features).squeeze(1)
+    features_tensor = torch.FloatTensor(features).reshape(-1,28,28).unsqueeze(0)
     with torch.no_grad():
         output = model(features_tensor)
         _, predicted_class = torch.max(output, 1)
