@@ -73,7 +73,7 @@ def predict():
     print("GETTING DATA HERE:")
     data = request.get_json(force=True)
     print("GOT DATA HERE:")
-    features = list(data['features'])
+    features = data['features']
     print("GOT FEATURES HERE:", features)
     # to_predict_list = request.form.to_dict()
     # to_predict_list = list(to_predict_list.values())
