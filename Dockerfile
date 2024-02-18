@@ -44,6 +44,8 @@ COPY mnist_97.pth ./
 
 COPY input.json ./
 
+COPY model.sav ./
+
 # setup.sh script that will act as entrypoint
 COPY setup.sh ./
 RUN chmod +x setup.sh
