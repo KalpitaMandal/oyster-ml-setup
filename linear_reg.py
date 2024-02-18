@@ -54,8 +54,8 @@ app = Flask(__name__)
 # model.load_state_dict(torch.load('/app/mnist_97.pth'))
 # model.eval()
 
-def ValuePredictor(to_predict_list):
-    to_predict = np.array(to_predict_list).reshape(-1, 1)
+def ValuePredictor():
+    to_predict = np.array([5.4, 3.9, 1.7, 0.4], dtype='float32').reshape(1, -1)
     loaded_model = joblib.load('/app/model.sav')
     result = loaded_model.predict(to_predict)
     return result[0]
@@ -63,21 +63,7 @@ def ValuePredictor(to_predict_list):
 # Route for making predictions
 @app.route('/predict', methods=['POST'])
 def predict():
-    # data = request.get_json(force=True)
-    # features = data['features']
-    # features_tensor = torch.FloatTensor(features).reshape(-1,28,28).unsqueeze(0)
-    # with torch.no_grad():
-    #     output = model(features_tensor)
-    #     _, predicted_class = torch.max(output, 1)
-    # prediction = predicted_class.item()
-    f = open('/app/sample.json')
-    data = json.load(f)
-    features = data['input_data']
-    # to_predict_list = request.form.to_dict()
-    # to_predict_list = list(to_predict_list.values())
-    to_predict_list = list(map(float, features))
-    print("PRINTING VALUES HERE:",to_predict_list)
-    result = round(float(ValuePredictor(to_predict_list)), 2)
+    result = round(float(ValuePredictor()), 2)
     return jsonify({'prediction': result})
 
 if __name__ == '__main__':
