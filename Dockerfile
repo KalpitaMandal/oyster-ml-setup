@@ -46,6 +46,8 @@ COPY input.json ./
 
 COPY model.sav ./
 
+COPY sample.json ./
+
 # setup.sh script that will act as entrypoint
 COPY setup.sh ./
 RUN chmod +x setup.sh

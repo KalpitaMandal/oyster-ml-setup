@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-# import json
+import json
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -70,11 +70,9 @@ def predict():
     #     output = model(features_tensor)
     #     _, predicted_class = torch.max(output, 1)
     # prediction = predicted_class.item()
-    print("GETTING DATA HERE:")
-    data = request.get_json(force=True)
-    print("GOT DATA HERE:")
-    features = data['features']
-    print("GOT FEATURES HERE:", features)
+    f = open('/app/sample.json')
+    data = json.load(f)
+    features = data['input_data']
     # to_predict_list = request.form.to_dict()
     # to_predict_list = list(to_predict_list.values())
     to_predict_list = list(map(float, features))
