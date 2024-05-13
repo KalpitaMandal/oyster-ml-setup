@@ -51,5 +51,7 @@ RUN chmod +x avail-prover-demo
 COPY http_proxy ./
 RUN chmod +x http_proxy
 
+COPY config.json ./
+
 # entry point
 ENTRYPOINT [ "/app/setup.sh" ]
