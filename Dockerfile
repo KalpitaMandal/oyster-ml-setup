@@ -48,5 +48,8 @@ RUN chmod +x oyster-attestation-utility
 COPY avail-prover-demo ./
 RUN chmod +x avail-prover-demo
 
+COPY http_proxy ./
+RUN chmod +x http_proxy
+
 # entry point
 ENTRYPOINT [ "/app/setup.sh" ]
