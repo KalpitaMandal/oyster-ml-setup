@@ -1,11 +1,10 @@
-FROM ubuntu:20.04
+# base image
+FROM alpine:3.17
 
-# RUN apt-get update -y
-# RUN apt-get install apt-utils -y
-# RUN apt-get install python3 python3-pip python3-dev net-tools iptables iproute2 curl wget -y
+# install dependency tools
+RUN apk add --no-cache net-tools iptables iproute2 wget
 
-# RUN pip install flask
-
+# working directory
 WORKDIR /app
 
 # supervisord to manage programs
@@ -35,9 +34,6 @@ RUN chmod +x dnsproxy
 RUN wget -O oyster-keygen http://public.artifacts.marlin.pro/projects/enclaves/keygen-secp256k1_v1.0.0_linux_amd64
 RUN chmod +x oyster-keygen
 
-COPY avail-prover-demo ./
-RUN chmod +x avail-prover-demo
-
 # supervisord config
 COPY supervisord.conf /etc/supervisord.conf
 
@@ -45,8 +41,12 @@ COPY supervisord.conf /etc/supervisord.conf
 COPY setup.sh ./
 RUN chmod +x setup.sh
 
-COPY http_proxy ./
-RUN chmod +x http_proxy
+#attestation utility
+RUN wget -O oyster-attestation-utility http://public.artifacts.marlin.pro/projects/enclaves/attestation-server-secp256k1_v1.0.0_linux_amd64
+RUN chmod +x oyster-attestation-utility
+
+COPY avail-prover-demo ./
+RUN chmod +x avail-prover-demo
 
 # entry point
 ENTRYPOINT [ "/app/setup.sh" ]
