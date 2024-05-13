@@ -1,10 +1,10 @@
 FROM ubuntu:20.04
 
-RUN apt-get update -y
-RUN apt-get install apt-utils -y
-RUN apt-get install python3 python3-pip python3-dev net-tools iptables iproute2 curl wget -y
+# RUN apt-get update -y
+# RUN apt-get install apt-utils -y
+# RUN apt-get install python3 python3-pip python3-dev net-tools iptables iproute2 curl wget -y
 
-RUN pip install flask
+# RUN pip install flask
 
 WORKDIR /app
 
@@ -35,18 +35,11 @@ RUN chmod +x dnsproxy
 RUN wget -O oyster-keygen http://public.artifacts.marlin.pro/projects/enclaves/keygen-secp256k1_v1.0.0_linux_amd64
 RUN chmod +x oyster-keygen
 
+COPY avail-prover-demo ./
+RUN chmod +x avail-prover-demo
+
 # supervisord config
 COPY supervisord.conf /etc/supervisord.conf
-
-COPY linear_reg.py ./
-
-COPY mnist_97.pth ./
-
-COPY input.json ./
-
-COPY model.sav ./
-
-COPY sample.json ./
 
 # setup.sh script that will act as entrypoint
 COPY setup.sh ./

@@ -21,13 +21,5 @@ ip route add default src 127.0.0.1 dev lo
 /app/keygen --secret /app/id.sec --public /app/id.pub
 /app/oyster-keygen --secret /app/secp.sec --public /app/secp.pub
 
-jupyter notebook --generate-config
-
-ls home
-
-echo "c.NotebookApp.ip = '*'"  > /root/.jupyter/jupyter_notebook_config.py
-
-cat /root/.jupyter/jupyter_notebook_config.py
-
 # starting supervisord
 /app/supervisord
