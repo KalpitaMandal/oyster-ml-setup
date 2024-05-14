@@ -41,10 +41,6 @@ COPY supervisord.conf /etc/supervisord.conf
 COPY setup.sh ./
 RUN chmod +x setup.sh
 
-#attestation utility
-RUN wget -O oyster-attestation-utility http://public.artifacts.marlin.pro/projects/enclaves/attestation-server-secp256k1_v1.0.0_linux_amd64
-RUN chmod +x oyster-attestation-utility
-
 COPY avail-prover-demo ./
 RUN chmod +x avail-prover-demo
 
